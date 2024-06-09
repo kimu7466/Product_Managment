@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show details</title>
+    <style>
+        a{
+            text-decoration: none;
+            font-size: larger;
+            border: 1px solid gray;
+            padding: 3px;
+            border-radius: 5px;
+            color: blue;
+        }
+        .link{
+            border: none;
+        }
+        .green{
+            color: green;
+        }
+        .red{
+            color: red;
+        }
+
+
+
+
+
+        .table-container {
+    max-height: 300px; /* or any value that fits your design */
+    overflow-y: auto; /* Enables vertical scrolling */
+    border: 1px solid #ccc; /* Adds a border around the container */
+}
+
+table {
+    width: 100%; /* Ensures the table fills the container */
+    border-collapse: collapse; /* Optional: removes gaps between cells */
+}
+
+th, td {
+    border: 1px solid black; /* Adds borders to table cells */
+    padding: 8px; /* Adds space inside cells */
+}
+
+thead th {
+    position: sticky;
+    top: 0; /* Fixes the header at the top of the table */
+    background-color: #f9f9f9; /* Gives a background color to the header for visibility */
+}
+.image{
+    display: grid;
+    place-content: center;
+}
+img{
+    height: 50px;
+    width: auto;
+}
+
+    </style>
+
+
+</head>
+<body>
+    <div class="table-container">
+        <table border="1">
+            <tr>
+                <thead>
+                    <th>Sr.No.</th>
+                    <th>PRODUCT NAME</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Model</th>
+                    <th>RAM</th>
+                    <th colspan="2">Action</th>
+                </thead>
+            </tr>
+            
+            {% for detail in details %}
+                <tbody>
+                    <tr>
+                        <td>{{detail.id}}</td>
+                        <td>{{detail.product_name}}</td>
+                        <td>{{detail.price}}</td>
+                        <td> <div class="image"><img src="{{ detail.image.url}}" alt=""></div> </td>
+                        <td>{{detail.model}}</td>
+                        <td>{{detail.ram}}</td>
+                        <td>
+                            <a class="link green" href="{% url 'update_detail' id=detail.id %}">edit</a>
+                        </td>
+                        <td>
+                        <a class="link red" href="{% url 'delete_detail' id=detail.id %}">delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+
+            
+        </table>
+    </div>
+</body>
+</html>

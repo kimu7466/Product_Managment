@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add product</title>
+    <style>
+        a{
+            text-decoration: none;
+            font-size: larger;
+            border: 1px solid gray;
+            padding: 3px;
+            border-radius: 5px;
+            color: blue;
+        }
+        .link{
+            border: none;
+        }
+        .green{
+            color: green;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">    
+        <a href="">home</a>
+        <a href="{% url 'log_out' %}">logout</a>
+    </div>
+    <hr>
+    <div class="form">
+        <form action="{% url 'add_product_name' %}" method="post">
+            {% csrf_token %}
+
+            <label for="product_id">Product ID : </label><br><br>
+            <input type="text" name="product_id"><br><br>
+            <label for="product_name">Product Name : </label><br><br>
+            <input type="text" name="product_name"><br><br>
+            <input type="submit"><br><br>
+        </form>
+    </div>
+
+    <hr>
+    <br><br>
+    <div class="table">
+        <table border="1">
+            <tr>
+                <thead>
+                    <th>PRODUCT ID</th>
+                    <th>PRODUCT NAME</th>
+                    <th>Action</th>
+                </thead>
+            </tr>
+            
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.p_id }}</td>
+                    <td>
+                        <a class="link" href="{% url 'product_detail' p_id=product.p_id %}">{{ product.p_name.upper }}</a>
+                    </td>
+                    <td>
+                        <a class="link green" href="{% url 'update_name' p_id=product.p_id %}">edit</a>
+                        <a class="link red" href="{% url 'delete_name' p_id=product.p_id %}">delete</a>
+                    </td>
+                </tr>                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+{%comment%}
+{% url 'update_name' p_id=product.p_id %}
+{% url 'product_detail' p_id=product.p_id %}
+{% url '#' %}
+{%endcomment%}

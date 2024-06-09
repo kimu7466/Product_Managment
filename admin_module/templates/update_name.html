@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        a{
+            text-decoration: none;
+            font-size: larger;
+            border: 1px solid gray;
+            padding: 3px;
+            border-radius: 5px;
+            color: blue;
+        }
+        .link{
+            border: none;
+        }
+        .green{
+            color: green;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="form">
+        <form action="{% url 'add_product_name' %}" method="post">
+            {% csrf_token %}
+
+            <label for="product_id">Product ID : </label><br><br>
+            <input type="text" name="product_id" value="{{product.p_id}}"><br><br>
+            
+            <label for="product_name">Product Name : </label><br><br>
+            <input type="text" name="product_name" value="{{product.p_name}}"><br><br>
+            <input type="submit"><br><br>
+        </form>
+    </div>
+    
+</body>
+</html>
